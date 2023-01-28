@@ -1,0 +1,5 @@
+patient,condition,fq1,fq2
+P1,NormalSkin,data/ctrl_93_1_short.fq.gz,data/ctrl_93_2_short.fq.gz
+P1,SCC,data/scc_93_1_short.fq.gz,data/scc_93_2_short.fq.gz
+P2,NormalSkin,data/ctrl_100_1_short.fq.gz,data/ctrl_100_2_short.fq.gz
+P2,SCC,data/scc_100_1_short.fq.gz,data/scc_100_2_short.fq.gz

@@ -1,0 +1,22 @@
+name: deseq2
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+    - bioconductor-deseq2
+    - bioconductor-tximport
+    - bioconductor-apeglm
+    - bioconductor-org.hs.eg.db
+    - bioconductor-rhdf5
+    - bioconductor-ihw
+    - bioconductor-tximeta
+    - r-ashr
+    - r-annotables
+    - r-readr
+    - r-stringr
+    - r-ggplot2
+    - r-dplyr
+    - r-svglite
+    - libiconv
+    - mscorefonts
+    - tzdata

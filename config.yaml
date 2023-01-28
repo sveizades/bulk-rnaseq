@@ -1,0 +1,60 @@
+# CSV file with sample information
+samples: samples.csv
+# samples: metadata.csv
+
+# SLURM Log File
+# # Set directory to save slurm log files (if using cluster execution)
+# # This can be an absolute or relative path
+# # If the directory doesn't exist the pipeline will create it
+slurm_log_dir: slurm-logs
+
+# General Info
+# Specify number of threads for quantification program (salmon or kallisto)
+quant_threads: 4
+# Specify number of threads for DESeq2
+deseq_threads: 4
+
+# Salmon Info
+# Location to folder with salmon index file data
+salmon_index: /home/groups/carilee/refs/rnaseq-refs/hg38/salmon_index
+# Whether Salmon should compute 100 inferential replicates using Gibbs sampling
+# Replicates are useful for Terminus to quantify transcript uncertainty
+# Value should be true or false
+salmon_compute_replicates: true
+
+# Variables to color label PCA plot
+# Comma separated list of columns specified in samples.csv
+pca_labels: condition
+
+# Experimental Design
+# NOTE: Interaction designs currently not supported - use deseq2/all.rds and
+# write a script to run interaction design
+# If you want to regress out patient specific affects, make sure the patient
+# variable is a character variable instead of a numeric type to avoid improper
+# coding. This can be done by ensuring the patient variable values have text and 
+# numbers
+design_formula: ~ condition
+
+# Contrasts for DESeq2 to estimate
+# These must be for the last (right most) variable in the design_formula
+# The specification is numerator-vs-denominator
+# Thus if you wanted to compare treated vs untreated samples with untreated
+# as the reference level, it would be treated-vs-untreated
+contrasts:
+    SCC-vs-NormalSkin:
+        - SCC
+        - NormalSkin
+# Factor level ordering for relevant variables in the design formula
+# The first value will be the reference level
+factor_levels:
+    condition: NormalSkin, SCC
+
+## Singularity Containers
+### This specifies the container to use for various steps in the pipeline
+### The value can be any string (either local path or url) that can be queried using singularity pull
+salmon_container: https://depot.galaxyproject.org/singularity/salmon:1.8.0--h7e5ed60_1 
+kallisto_container: https://depot.galaxyproject.org/singularity/kallisto:0.46.2--h60f4f9f_2
+fastqc_container: https://depot.galaxyproject.org/singularity/fastqc:0.11.9--hdfd78af_1
+multiqc_container: https://depot.galaxyproject.org/singularity/multiqc:1.11--pyhdfd78af_0
+r_container: docker://tbencomo/deseq2
+validateFastq_container: https://depot.galaxyproject.org/singularity/biopet-validatefastq:0.1.1--hdfd78af_3
